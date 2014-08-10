@@ -86,6 +86,12 @@ These are the customisation options specific to Pie & Doughnut charts. These opt
 
 	//Boolean - Whether we animate scaling the Doughnut from the centre
 	animateScale : false,
+
+	//Number - Starting angle in radians, default 1.5*PI (top)
+	startAngle: 1.5*Math.PI,
+
+	//Number - Total circumference in radians, default 2*PI (full circle)
+	totalCircumference: 2*Math.PI,
 	{% raw %}
 	//String - A legend template
 	legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"

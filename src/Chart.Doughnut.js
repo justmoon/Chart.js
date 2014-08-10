@@ -31,6 +31,12 @@
 		//Boolean - Whether we animate scaling the Doughnut from the centre
 		animateScale : false,
 
+		//Number - Starting angle in radians, default 1.5*PI (top)
+		startAngle: 1.5*Math.PI,
+
+		//Number - Total circumference in radians, default 2*PI (full circle)
+		totalCircumference: 2*Math.PI,
+
 		//String - A legend template
 		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
@@ -99,7 +105,7 @@
 				showStroke : this.options.segmentShowStroke,
 				strokeWidth : this.options.segmentStrokeWidth,
 				strokeColor : this.options.segmentStrokeColor,
-				startAngle : Math.PI * 1.5,
+				startAngle : this.options.startAngle,
 				circumference : (this.options.animateRotate) ? 0 : this.calculateCircumference(segment.value),
 				label : segment.label
 			}));
@@ -109,7 +115,7 @@
 			}
 		},
 		calculateCircumference : function(value){
-			return (Math.PI*2)*(value / this.total);
+			return this.options.totalCircumference*(value / this.total);
 		},
 		calculateTotal : function(data){
 			this.total = 0;
@@ -165,7 +171,7 @@
 
 				segment.draw();
 				if (index === 0){
-					segment.startAngle = Math.PI * 1.5;
+					segment.startAngle = this.options.startAngle;
 				}
 				//Check to see if it's the last segment, if not get the next and update the start angle
 				if (index < this.segments.length-1){
